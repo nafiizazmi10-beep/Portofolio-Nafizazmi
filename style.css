@@ -752,4 +752,187 @@ footer p {
         width: 380px;
         height: 380px;
     }
+
+    /* Tambahkan CSS untuk efek tambahan */
+
+/* Partikel background */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatParticle infinite ease-in-out;
+    opacity: 0.7;
+}
+
+@keyframes floatParticle {
+    0%, 100% { 
+        transform: translateY(0) translateX(0) rotate(0deg); 
+    }
+    25% { 
+        transform: translateY(-20px) translateX(10px) rotate(90deg); 
+    }
+    50% { 
+        transform: translateY(-40px) translateX(-10px) rotate(180deg); 
+    }
+    75% { 
+        transform: translateY(-20px) translateX(-5px) rotate(270deg); 
+    }
+}
+
+/* Cursor kustom */
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(138, 43, 226, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s, background 0.2s;
+    transform: translate(-50%, -50%);
+}
+
+.custom-cursor-2 {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: rgba(65, 105, 225, 0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+/* Efek klik partikel */
+.click-particle {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* Animasi shake untuk logo */
+@keyframes shake {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    75% { transform: translateX(5px) rotate(5deg); }
+}
+
+/* Efek neon untuk teks */
+.neon-text {
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #8a2be2,
+        0 0 30px #8a2be2,
+        0 0 40px #8a2be2;
+    animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon {
+    from {
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 15px #fff,
+            0 0 20px #8a2be2,
+            0 0 30px #8a2be2,
+            0 0 40px #8a2be2;
+    }
+    to {
+        text-shadow: 
+            0 0 2px #fff,
+            0 0 5px #fff,
+            0 0 7px #fff,
+            0 0 10px #8a2be2,
+            0 0 15px #8a2be2,
+            0 0 20px #8a2be2;
+    }
+}
+
+/* Efek loading saat pertama kali */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #0c0e2a, #1a1b3a);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    animation: fadeOut 1s ease 3s forwards;
+}
+
+.loading-spinner {
+    width: 80px;
+    height: 80px;
+    border: 5px solid rgba(138, 43, 226, 0.3);
+    border-top: 5px solid #8a2be2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* Efek glitch untuk hero */
+.hero-text h1 {
+    position: relative;
+}
+
+.hero-text h1::before,
+.hero-text h1::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-text h1::before {
+    animation: glitch-top 1s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+.hero-text h1::after {
+    animation: glitch-bottom 1.5s infinite;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-top {
+    0%, 100% { transform: translate(0); opacity: 1; }
+    33% { transform: translate(-2px, 2px); opacity: 0.8; }
+    66% { transform: translate(2px, -1px); opacity: 0.8; }
+}
+
+@keyframes glitch-bottom {
+    0%, 100% { transform: translate(0); opacity: 1; }
+    33% { transform: translate(2px, -2px); opacity: 0.8; }
+    66% { transform: translate(-2px, 1px); opacity: 0.8; }
+}
 }

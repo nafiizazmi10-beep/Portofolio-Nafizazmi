@@ -148,4 +148,171 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mulai efek ketik ulang setiap 10 detik
         setInterval(retypeText, 10000);
     }
+
+    // Tambahkan efek partikel keren
+function createParticles() {
+    const particleCount = 50;
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'particles-container';
+    document.querySelector('.space-bg').appendChild(particlesContainer);
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Ukuran dan posisi acak
+        const size = Math.random() * 5 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const duration = Math.random() * 10 + 10;
+        const delay = Math.random() * 5;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        // Warna biru/ungu acak
+        const colors = ['#8a2be2', '#4169e1', '#9370db', '#6a5acd', '#483d8b'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.backgroundColor = color;
+        particle.style.boxShadow = `0 0 10px ${color}`;
+        
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Tambahkan efek cursor kustom
+function createCustomCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+    
+    const cursor2 = document.createElement('div');
+    cursor2.className = 'custom-cursor-2';
+    document.body.appendChild(cursor2);
+    
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        setTimeout(() => {
+            cursor2.style.left = e.clientX + 'px';
+            cursor2.style.top = e.clientY + 'px';
+        }, 100);
+    });
+    
+    // Ubah cursor saat hover tombol
+    const buttons = document.querySelectorAll('button, .social-icon, .btn-wa');
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2)';
+            cursor.style.background = 'rgba(138, 43, 226, 0.3)';
+        });
+        btn.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.background = 'rgba(65, 105, 225, 0.1)';
+        });
+    });
+}
+
+// Tambahkan efek suara klik (opsional)
+function addClickSounds() {
+    const buttons = document.querySelectorAll('button, .btn-wa, .nav-link');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Efek visual klik
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Tambah efek partikel klik
+            createClickParticles(event);
+        });
+    });
+}
+
+function createClickParticles(event) {
+    const particleCount = 8;
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'click-particle';
+        
+        const colors = ['#8a2be2', '#4169e1', '#ff00ff'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        particle.style.left = event.clientX + 'px';
+        particle.style.top = event.clientY + 'px';
+        particle.style.background = color;
+        particle.style.boxShadow = `0 0 10px ${color}`;
+        
+        document.body.appendChild(particle);
+        
+        // Animasi partikel
+        const angle = (i / particleCount) * Math.PI * 2;
+        const speed = Math.random() * 50 + 30;
+        const x = Math.cos(angle) * speed;
+        const y = Math.sin(angle) * speed;
+        
+        particle.animate([
+            { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+            { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+        ], {
+            duration: 600,
+            easing: 'ease-out'
+        });
+        
+        setTimeout(() => particle.remove(), 600);
+    }
+}
+
+// Tambahkan efek scroll reveal 3D
+function add3DScrollEffect() {
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const delta = scrolled - lastScrollY;
+        
+        // Efek parallax 3D ringan
+        document.querySelectorAll('.about-card, .contact-card').forEach((card, index) => {
+            const speed = (index + 1) * 0.5;
+            card.style.transform = `perspective(1000px) rotateX(${delta * 0.1}deg) rotateY(${delta * 0.05}deg) translateZ(${delta * speed}px)`;
+        });
+        
+        lastScrollY = scrolled;
+    });
+}
+
+// Inisialisasi semua efek tambahan
+document.addEventListener('DOMContentLoaded', () => {
+    // Panggil fungsi-fungsi baru
+    createParticles();
+    createCustomCursor();
+    addClickSounds();
+    add3DScrollEffect();
+    
+    // Tambahkan efek hover bergetar untuk logo
+    const logo = document.querySelector('.logo-text');
+    logo.addEventListener('mouseenter', () => {
+        logo.style.animation = 'shake 0.5s ease';
+        setTimeout(() => {
+            logo.style.animation = '';
+        }, 500);
+    });
+    
+    // Efek ketukan keyboard saat hover text
+    const textElements = document.querySelectorAll('h1, h2, h3');
+    textElements.forEach(text => {
+        text.addEventListener('mouseenter', () => {
+            text.style.textShadow = '0 0 20px rgba(138, 43, 226, 0.7)';
+        });
+        text.addEventListener('mouseleave', () => {
+            text.style.textShadow = '';
+        });
+    });
+});
 });
